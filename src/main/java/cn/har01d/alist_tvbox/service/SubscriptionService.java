@@ -1356,7 +1356,7 @@ public class SubscriptionService {
             key = rightPadding(key, "0", 16);
             byte[] data2 = toBytes(data);
             SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, keySpec);
             return new String(cipher.doFinal(data2));
         } catch (Exception e) {
@@ -1367,7 +1367,7 @@ public class SubscriptionService {
 
     public static String CBC(String data, String key, String iv) {
         try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
             AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv.getBytes());
             cipher.init(Cipher.DECRYPT_MODE, keySpec, paramSpec);
